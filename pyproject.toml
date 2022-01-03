@@ -5,9 +5,11 @@ description = ""
 authors = ["Shihabaln <shihab.nasiri@rihal.om>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.8"
+scipy = "^1.7.3"
 Flask = "^2.0.2"
-tensorflow = "2.5"
+tensorflow = "^2.7.0"
+Pillow = "^9.0.0"
 
 [tool.poetry.dev-dependencies]
 
