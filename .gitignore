@@ -130,6 +130,5 @@ dmypy.json
 
 
 #images 
-static/images*
-train*
-validation*
+/train 
+/validation
