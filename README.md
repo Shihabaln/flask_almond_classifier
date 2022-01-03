@@ -1,5 +1,9 @@
 # Almond Classifier 
-This project objective is classify almonds into diffrent classes. 
+This project objective is to classify almonds into diffrent classes. 
+
+
+## Demo 
+Clasify into nomral or broken almonds
 
 
 
