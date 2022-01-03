@@ -84,7 +84,11 @@ def uploaded_file(filename):
     mySession = app.config['SESSION']
     myModel = app.config['MODEL']
     myGraph = app.config['GRAPH']
-    with myGraph.as_default():
+    with mySession.as_default():
+        with myGraph.as_default():
+            mySession = tf.compat.v1.Session()
+        myModel = load_model(ML_MODEL_FILENAME)
+        myGraph = tf.compat.v1.get_default_graph()
         set_session(mySession)
         result = myModel.predict(test_image)
         image_src = "/"+UPLOAD_FOLDER +"/"+filename
@@ -94,7 +98,7 @@ def uploaded_file(filename):
             answer = "<div class='col'></div><div class='col text-center'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+Y+" "+str(result[0])+"</h4></div><div class='w-100'></div>"     
         results.append(answer)
         return render_template('index.html',myX=X,myY=Y,mySampleX=sampleX,mySampleY=sampleY,len=len(results),results=results)
-
+    
 
 
 def main():
