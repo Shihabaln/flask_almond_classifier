@@ -105,6 +105,10 @@ def main():
     (mySession,myModel,myGraph) = load_model_from_file()
     
     app.config['SECRET_KEY'] = 'super secret key'
+
+    #Debuggin On
+    config = {"DEBUG": True }
+    app.config.from_mapping(config)
     
     app.config['SESSION'] = mySession
     app.config['MODEL'] = myModel
