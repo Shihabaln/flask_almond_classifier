@@ -20,7 +20,7 @@ EPOCHS = 50 #Higher for more time training model... diminishing returns
 BATCH_SIZE = 5
 
 # Machine Learning Model Filename
-ML_MODEL_FILENAME = 'saved_model.h5'
+ML_MODEL_FILENAME = 'saved_model'
 
 def build_model():
     

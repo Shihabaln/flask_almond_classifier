@@ -32,6 +32,11 @@ from keras.models import load_model
 from keras.backend import set_session
 import tensorflow as tf
 
+
+# resize image 
+from PIL import Image
+import numpy as np
+from skimage import transform
 # Create the website object
 app = Flask(__name__)
 
@@ -42,6 +47,14 @@ def load_model_from_file():
     myModel = load_model(ML_MODEL_FILENAME)
     myGraph = tf.compat.v1.get_default_graph()
     return (mySession,myModel,myGraph)
+
+
+def load(filename):
+   np_image = Image.open(filename)
+   np_image = np.array(np_image).astype('float32')/255
+   np_image = transform.resize(np_image, (150, 150, 3))
+   np_image = np.expand_dims(np_image, axis=0)
+   return np_image
 
 #Try to allow only images
 def allowed_file(filename):
@@ -77,9 +90,8 @@ def upload_file():
     
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    test_image = image.load_img(UPLOAD_FOLDER+"/"+filename,target_size=(150,150))
-    test_image = image.img_to_array(test_image)
-    test_image = np.expand_dims(test_image, axis=0)
+    # test_image = image.load_img(UPLOAD_FOLDER+"/"+filename)
+    test_image = load(UPLOAD_FOLDER+"/"+filename)
 
     mySession = app.config['SESSION']
     myModel = app.config['MODEL']
@@ -87,17 +99,17 @@ def uploaded_file(filename):
     with mySession.as_default():
         with myGraph.as_default():
             mySession = tf.compat.v1.Session()
-        myModel = load_model(ML_MODEL_FILENAME)
-        myGraph = tf.compat.v1.get_default_graph()
-        set_session(mySession)
-        result = myModel.predict(test_image)
-        image_src = "/"+UPLOAD_FOLDER +"/"+filename
-        if result[0] < 0.5 :
-            answer = "<div class='col text-center'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+X+" "+str(result[0])+"</h4></div><div class='col'></div><div class='w-100'></div>"     
-        else:
-            answer = "<div class='col'></div><div class='col text-center'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+Y+" "+str(result[0])+"</h4></div><div class='w-100'></div>"     
-        results.append(answer)
-        return render_template('index.html',myX=X,myY=Y,mySampleX=sampleX,mySampleY=sampleY,len=len(results),results=results)
+            myModel = load_model(ML_MODEL_FILENAME)
+            myGraph = tf.compat.v1.get_default_graph()
+            set_session(mySession)
+            result = myModel.predict(test_image)
+            image_src = "/"+UPLOAD_FOLDER +"/"+filename
+            if result[0] < 0.5 :
+                answer = "<div class='col text-center'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+Y+" "+str(result[0])+"</h4></div><div class='col'></div><div class='w-100'></div>"     
+            else:
+                answer = "<div class='col'></div><div class='col text-center'><img width='150' height='150' src='"+image_src+"' class='img-thumbnail' /><h4>guess:"+X+" "+str(result[0])+"</h4></div><div class='w-100'></div>"     
+            results.append(answer)
+            return render_template('index.html',myX=X,myY=Y,mySampleX=sampleX,mySampleY=sampleY,len=len(results),results=results)
     
 
 
