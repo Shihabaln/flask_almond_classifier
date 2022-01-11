@@ -11,16 +11,16 @@ from tensorflow.keras import backend as K
 IMG_WIDTH, IMG_HEIGHT = 150,150
 
 #Set the constants
-TRAIN_DATA_DIR = 'train'
-VALIDATION_DATA_DIR = 'validation'
-NB_TRAIN_SAMPLES = 20   #Must match number of files
-NB_VALIDATION_SAMPLES = 20
+Train_data = 'train'
+Validation_data = 'validation'
+No_train = 20   #Must match number of files
+No_validation = 20
 
-EPOCHS = 50 #Higher for more time training model... diminishing returns
-BATCH_SIZE = 5
+Epochs = 50 
+Batch = 5
 
 # Machine Learning Model Filename
-ML_MODEL_FILENAME = 'saved_model'
+Model_name = 'saved_model.h5'
 
 def build_model():
     
@@ -73,23 +73,23 @@ def train_model(model):
     test_datagen = ImageDataGenerator(rescale= 1. / 255)
 
     train_generator = train_datagen.flow_from_directory(
-            TRAIN_DATA_DIR,
+            Train_data,
             target_size=(IMG_WIDTH, IMG_HEIGHT),
-            batch_size=BATCH_SIZE,
+            batch_size=Batch,
             class_mode='binary')
 
     validation_generator = test_datagen.flow_from_directory(
-            VALIDATION_DATA_DIR,
+            Validation_data,
             target_size=(IMG_WIDTH, IMG_HEIGHT),
-            batch_size=BATCH_SIZE,
+            batch_size=Batch,
             class_mode='binary')
     
     model.fit_generator(
             train_generator,
-            steps_per_epoch=NB_VALIDATION_SAMPLES // BATCH_SIZE,
-            epochs=EPOCHS,
+            steps_per_epoch=No_validation // Batch,
+            epochs=Epochs,
             validation_data=validation_generator,
-            validation_steps=NB_VALIDATION_SAMPLES // BATCH_SIZE)
+            validation_steps=No_validation // Batch)
      
     return model
 
@@ -100,7 +100,7 @@ def main():
     tf.keras.backend.clear_session()
     myModel = build_model()
     myModel = train_model(myModel)
-    myModel.save(ML_MODEL_FILENAME)
+    myModel.save(Model_name)
 
 
 main()
