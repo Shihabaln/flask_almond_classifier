@@ -1,5 +1,3 @@
-
-#import the libraries
 from keras.preprocessing.image import ImageDataGenerator
 
 from keras.models import Sequential
@@ -8,33 +6,29 @@ import tensorflow as tf
 from tensorflow.keras import backend as K
 
 #Set the image size with are learning from
-IMG_WIDTH, IMG_HEIGHT = 150,150
+Img_width, Img_height = 150,150
 
 #Set the constants
-TRAIN_DATA_DIR = 'train'
-VALIDATION_DATA_DIR = 'validation'
-NB_TRAIN_SAMPLES = 20   #Must match number of files
-NB_VALIDATION_SAMPLES = 20
+Train_data = 'train'
+Validation_data = 'validation'
+No_train = 20   #Must match number of files
+No_validation = 20
 
-EPOCHS = 50 #Higher for more time training model... diminishing returns
-BATCH_SIZE = 5
+Epochs = 50 
+Batch = 5
 
 # Machine Learning Model Filename
-ML_MODEL_FILENAME = 'saved_model'
+Model_name = 'saved_model.h5'
 
 def build_model():
     
     if K.image_data_format() == 'channels_first':
-        input_shape = (3, IMG_WIDTH, IMG_HEIGHT)
+        input_shape = (3, Img_width, Img_height)
     else:
-        input_shape = (IMG_WIDTH, IMG_HEIGHT, 3)
+        input_shape = (Img_width, Img_height, 3)
 
     model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    
-    model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     
@@ -68,28 +62,28 @@ def train_model(model):
             horizontal_flip=True,
             fill_mode='nearest')
     
-    # this is the augmentation configuration we will use for testing:
+    
     # only rescaling
     test_datagen = ImageDataGenerator(rescale= 1. / 255)
 
     train_generator = train_datagen.flow_from_directory(
-            TRAIN_DATA_DIR,
-            target_size=(IMG_WIDTH, IMG_HEIGHT),
-            batch_size=BATCH_SIZE,
+            Train_data,
+            target_size=(Img_width, Img_height),
+            batch_size=Batch,
             class_mode='binary')
 
     validation_generator = test_datagen.flow_from_directory(
-            VALIDATION_DATA_DIR,
-            target_size=(IMG_WIDTH, IMG_HEIGHT),
-            batch_size=BATCH_SIZE,
+            Validation_data,
+            target_size=(Img_width, Img_height),
+            batch_size=Batch,
             class_mode='binary')
     
     model.fit_generator(
             train_generator,
-            steps_per_epoch=NB_VALIDATION_SAMPLES // BATCH_SIZE,
-            epochs=EPOCHS,
+            steps_per_epoch=No_validation // Batch,
+            epochs=Epochs,
             validation_data=validation_generator,
-            validation_steps=NB_VALIDATION_SAMPLES // BATCH_SIZE)
+            validation_steps=No_validation // Batch)
      
     return model
 
@@ -100,7 +94,7 @@ def main():
     tf.keras.backend.clear_session()
     myModel = build_model()
     myModel = train_model(myModel)
-    myModel.save(ML_MODEL_FILENAME)
+    myModel.save(Model_name)
 
 
 main()
