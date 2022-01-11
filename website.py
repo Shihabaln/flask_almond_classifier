@@ -52,7 +52,7 @@ def load(filename):
    np_image = np.expand_dims(np_image, axis=0)
    return np_image
 
-#Try to allow only images
+#To allow only images
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in Allowed_files
 
