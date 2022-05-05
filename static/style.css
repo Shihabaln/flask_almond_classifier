@@ -24,8 +24,9 @@ div#image-container > img {
 .header {
     background-color: #66ccff;
     color: #000000;
-    padding: 15px;
-    height: 75px;
+    text-align: center;
+    padding: 20px;
+    height: 100px;
 }
 .footer {
     background-color: #66ccff;
