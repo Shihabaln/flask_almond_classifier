@@ -13,13 +13,6 @@ class Image(db.Model):
     def __repr__(self):
         return '<image id={},name={}>'.format(self.id, self.name)
 
-
-# Function to add and commit images to db
-def add_image(image_dict):
-    new_image = Image(name=image_dict['name'])
-    db.session.add(new_image)
-    db.session.commit()
-
 def create_connection(db_file):
     """ create a database connection to the SQLite database
         specified by the db_file
@@ -50,3 +43,10 @@ def select_image(conn,name):
         return row[1]
 
     cur.close
+
+# Function to add images name to db
+def add_image(image_dict):
+    new_image = Image(name=image_dict['name'])
+    db.session.add(new_image)
+    db.session.commit()
+

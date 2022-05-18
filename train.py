@@ -3,9 +3,9 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, Activation, MaxPooling2D, Flatten, Dense, Dropout
 import tensorflow as tf
-from tensorflow.keras import backend as K
+from keras import backend as K
 
-#Set the image size with are learning from
+#Set the image size wich are learning from
 Img_width, Img_height = 150,150
 
 #Set the constants
