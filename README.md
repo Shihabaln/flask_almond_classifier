@@ -8,11 +8,14 @@ The project report can be found [here](report.pdf).
 
 ## Demo 
 Classify into nomral or broken almonds
+ flask
 
 ![Screenshot 2022-05-19 135100](https://user-images.githubusercontent.com/83282165/169712618-29bc7cec-c60a-4568-9589-d0769aed989f.jpg)
 
 ![Screenshot 2022-01-11 115102](https://user-images.githubusercontent.com/83282165/148902582-e1e32d5a-d0ee-4be5-b416-52cac0c52e96.jpg)
 
+
+ main
 
 ## Project files
 * run `python train.py`. It will train the model and save it model format .h5 (keras model). 
