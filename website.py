@@ -29,14 +29,15 @@ from werkzeug.utils import secure_filename
 #ML libraries
 from keras.preprocessing import image
 from keras.backend import set_session
+from keras.models import load_model
 import tensorflow as tf
 
 from flask_sqlalchemy import SQLAlchemy
+
 #Custom helper functions 
 from db import db_init, db
 from db_models import Image, add_image, create_connection, select_image
-from models import load_model, load, load_model_from_file
-
+from helper import load_model_from_file, load
 # Create the website object
 app = Flask(__name__)
 

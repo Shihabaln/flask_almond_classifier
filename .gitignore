@@ -76,7 +76,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-
+.ipynb
 # IPython
 profile_default/
 ipython_config.py
@@ -128,7 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.docx
+#images
+static/uploads/
 
-#images 
-/train 
-/validation
