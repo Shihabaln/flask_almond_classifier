@@ -9,6 +9,8 @@ The project report can be found [here](report.pdf).
 ## Demo 
 Clasify into nomral or broken almonds
 
+![Screenshot 2022-05-19 135100](https://user-images.githubusercontent.com/83282165/169712618-29bc7cec-c60a-4568-9589-d0769aed989f.jpg)
+
 ![Screenshot 2022-01-03 135421](https://user-images.githubusercontent.com/83282165/148902586-ab165a4c-14fa-4cbf-b50d-8b5c77a6f1e8.jpg)
 ![Screenshot 2022-01-11 115102](https://user-images.githubusercontent.com/83282165/148902582-e1e32d5a-d0ee-4be5-b416-52cac0c52e96.jpg)
 
