@@ -3,18 +3,18 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, Activation, MaxPooling2D, Flatten, Dense, Dropout
 import tensorflow as tf
-from tensorflow.keras import backend as K
+from keras import backend as K
 
-#Set the image size with are learning from
+#Set the image size wich are learning from
 Img_width, Img_height = 150,150
 
 #Set the constants
 Train_data = 'train'
 Validation_data = 'validation'
-No_train = 20   #Must match number of files
+No_train = 20   
 No_validation = 20
 
-Epochs = 50 
+Epochs = 50
 Batch = 5
 
 # Machine Learning Model Filename
@@ -26,7 +26,7 @@ def build_model():
         input_shape = (3, Img_width, Img_height)
     else:
         input_shape = (Img_width, Img_height, 3)
-
+    # Create the actual neural network here
     model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=input_shape))
     model.add(Activation('relu'))
@@ -51,7 +51,7 @@ def build_model():
 
 
 def train_model(model):
-    # this is the augmentation configuration we will use for training
+    # this is the augmentation configuration used for training
     train_datagen = ImageDataGenerator(
             rotation_range = 40,
             width_shift_range = 0.2,
@@ -63,7 +63,7 @@ def train_model(model):
             fill_mode='nearest')
     
     
-    # only rescaling
+    #rescaling
     test_datagen = ImageDataGenerator(rescale= 1. / 255)
 
     train_generator = train_datagen.flow_from_directory(
