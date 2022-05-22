@@ -7,7 +7,7 @@ The neural networks model architecture called “convolutional” networks short
 The project report can be found [here](report.pdf).
 
 ## Demo 
-Clasify into nomral or broken almonds
+Classify into nomral or broken almonds
 
 ![Screenshot 2022-05-19 135100](https://user-images.githubusercontent.com/83282165/169712618-29bc7cec-c60a-4568-9589-d0769aed989f.jpg)
 
